@@ -1,9 +1,9 @@
 {{! Maintainers - Kevin Corry}}
-<div class="component-inner responsiveIframe-inner">
+<div class="component__inner responsiveiframe__inner">
   {{> component this}}
-  <div class="component-widget responsiveIframe-widget">
-    <div class="responsiveIframe-iframe-holder">
-      <iframe title="{{iframeTitle}}" scrolling="{{#if _scrolling}}{{_scrolling}}{{else}}no{{/if}}" class="responsiveIframe-iframe" src="{{_source}}"
+  <div class="component__widget responsiveiframe__widget">
+    <div class="responsiveiframe__iframe-holder">
+      <iframe title="{{iframeTitle}}" scrolling="{{#if _scrolling}}{{_scrolling}}{{else}}no{{/if}}" class="responsiveiframe__iframe" src="{{_source}}"
         data-height-large="{{_height._large}}" data-height-medium="{{_height._medium}}" data-height-small="{{_height._small}}"
         data-width-large="{{_width._large}}" data-width-medium="{{_width._medium}}" data-width-small="{{_width._small}}" allowfullscreen webkitallowfullscreen mozallowfullscreen>
       </iframe>
