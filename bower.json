@@ -1,6 +1,7 @@
 {
   "name": "adapt-contrib-responsiveIframe",
-  "version": "1.0.5",
+  "version": "2.0.0",
+  "framework": ">=5.3.0",
   "homepage": "https://github.com/LearningPool/adapt-contrib-responsiveIframe",
   "authors": [
     "Kevin Corry <kevinc@learningpool.com>"

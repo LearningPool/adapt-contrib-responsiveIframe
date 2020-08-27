@@ -3,59 +3,60 @@
 * License - http://github.com/adaptlearning/adapt_framework/LICENSE
 * Maintainers - Kevin Corry <kevinc@learningpool.com>
 */
-define(function(require) {
+define([
+  'coreJS/adapt',
+  'coreViews/componentView'
+], function (Adapt, ComponentView) {
 
-    var ComponentView = require("coreViews/componentView");
-    var Adapt = require("coreJS/adapt");
+  class ResponsiveIframe extends ComponentView {
 
-    var ResponsiveIframe = ComponentView.extend({
+    events() {
+      return {
+        'inview': 'inview'
+      }
+    }
 
-        events: {
-            'inview': 'inview'
-        },
+    preRender() {
+      this.listenTo(Adapt, 'device:changed', this.resizeControl);
 
-        preRender: function() {
-            this.listenTo(Adapt, 'device:changed', this.resizeControl);
+      this.checkIfResetOnRevisit();
 
-            this.checkIfResetOnRevisit();
+      // Set the title of the IFRAME
+      var iframeTitle = this.model.get('displayTitle') || this.model.get('title');
+      this.model.set("iframeTitle", iframeTitle);
+    }
 
-            // Set the title of the IFRAME
-            var iframeTitle = this.model.get('displayTitle') || this.model.get('title');
-            this.model.set("iframeTitle", iframeTitle);
-        },
+    checkIfResetOnRevisit() {
+      var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
-        checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+      // If reset is enabled set defaults
+      if (isResetOnRevisit) {
+        this.model.reset(isResetOnRevisit);
+      }
+    }
 
-            // If reset is enabled set defaults
-            if (isResetOnRevisit) {
-                this.model.reset(isResetOnRevisit);
-            }
-        },
+    postRender() {
+      this.$('.responsiveiframe__iframe').ready(() => {
+        this.resizeControl(Adapt.device.screenSize);
+        this.setReadyStatus();
+      });
+    }
 
-        postRender: function() {
-            var that = this;
-            this.$('.responsiveIframe-iframe').ready(function() {
-                that.resizeControl(Adapt.device.screenSize);
-                that.setReadyStatus();
-            });
-        },
+    inview(event, visible) {
+      if (visible) {
+        this.setCompletionStatus();
+      }
+    }
 
-        inview: function(event, visible) {
-            if (visible) {
-                this.setCompletionStatus();
-            }
-        },
+    resizeControl(size) {
+      var width = this.$('.responsiveiframe__iframe').attr('data-width-' + size);
+      var height = this.$('.responsiveiframe__iframe').attr('data-height-' + size);
+      this.$('.responsiveiframe__iframe').width(width);
+      this.$('.responsiveiframe__iframe').height(height);
+    }
 
-        resizeControl: function(size) {
-            var width = this.$('.responsiveIframe-iframe').attr('data-width-' + size);
-            var height = this.$('.responsiveIframe-iframe').attr('data-height-' + size);
-            this.$('.responsiveIframe-iframe').width(width);
-            this.$('.responsiveIframe-iframe').height(height);
-        }
+  };
 
-    });
-
-    Adapt.register("responsiveIframe", ResponsiveIframe);
+  Adapt.register("responsiveIframe", ResponsiveIframe);
 
 });
