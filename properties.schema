@@ -48,6 +48,7 @@
           "required": true,
           "title": "Small width",
           "inputType": "Number",
+          "default": 300,
           "validators": ["number", "required"],
           "help": "Width with a small viewport"
         },
@@ -56,6 +57,7 @@
           "required": true,
           "title": "Medium width",
           "inputType": "Number",
+          "default": 500,
           "validators": ["number", "required"],
           "help": "Width with a medium viewport"
         },
@@ -64,6 +66,7 @@
           "required": true,
           "title": "Large width",
           "inputType": "Number",
+          "default": 750,
           "validators": ["number", "required"],
           "help": "Width with a large viewport"
         }
@@ -79,6 +82,7 @@
           "required": true,
           "title": "Small height",
           "inputType": "Number",
+          "default": 250,
           "validators": ["number", "required"],
           "help": "Height with a small viewport"
         },
@@ -87,6 +91,7 @@
           "required": true,
           "title": "Medium height",
           "inputType": "Number",
+          "default": 350,
           "validators": ["number", "required"],
           "help": "Height with a medium viewport"
         },
@@ -95,6 +100,7 @@
           "required": true,
           "title": "Large height",
           "inputType": "Number",
+          "default": 550,
           "validators": ["number", "required"],
           "help": "Height with a large viewport"
         }
